@@ -7,18 +7,35 @@
 
 require('./bootstrap');
 
+//iCheck for checkbox and radio inputs
+$(function () {
+    $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
+        checkboxClass: 'icheckbox_minimal-blue',
+        radioClass   : 'iradio_minimal-blue'
+    })
+})
+
 window.Vue = require('vue');
+import { Form, HasError, AlertError } from 'vform';
+
+window.Form = Form;
+
+Vue.component(HasError.name, HasError)
+Vue.component(AlertError.name, AlertError)
 
 import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
 let routes = [
     { path: '/dashboard', component: require('./components/Dashboard.vue') },
-    { path: '/products', component: require('./components/Product.vue') }
+    { path: '/products', component: require('./components/products/List.vue') }
 ]
 
 const router = new VueRouter({
-    routes // short for `routes: routes`
+    mode: 'history',
+    routes, // short for `routes: routes`,
+    linkActiveClass: "active", // active class for non-exact links.
+    linkExactActiveClass: "active" // active class for *exact* links.
 })
 /**
  * Next, we will create a fresh Vue application instance and attach it to
