@@ -7,29 +7,10 @@
 
 require('./bootstrap');
 
-//iCheck for checkbox and radio inputs
-$(function () {
-    // $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
-    //     checkboxClass: 'icheckbox_minimal-blue',
-    //     radioClass   : 'iradio_minimal-blue'
-    // })
-
-    // $('resepDokter[type=checkbox].iCheck').on('ifChecked', function(event){
-    //     window.isResepDokter =  true;
-    // });
-    // $('resepDokter[type=checkbox].iCheck').on('ifUnchecked', function(event){
-    //     window.isResepDokter =  false;
-    // });
-    // $('narkotika[type=checkbox].iCheck').on('ifChecked', function(event){
-    //     window.isNarkotika =  true;
-    // });
-    // $('narkotika[type=checkbox].iCheck').on('ifUnchecked', function(event){
-    //     window.isNarkotika =  false;
-    // });
-})
-
 window.Vue = require('vue');
+
 import moment from 'moment';
+Vue.use(moment);
 import { Form, HasError, AlertError } from 'vform';
 
 window.Form = Form;
@@ -75,9 +56,16 @@ Vue.use(VueProgressBar,{
     height:'2px'
 });
 
+import datePicker from 'vue-bootstrap-datetimepicker';
+Vue.use(datePicker);
+
+// import Datepicker from 'vuejs-datepicker';
+// Vue.use(Datepicker);
+
 let routes = [
     { path: '/dashboard', component: require('./components/Dashboard.vue') },
-    { path: '/products', component: require('./components/products/List.vue') }
+    { path: '/products', component: require('./components/products/List.vue') },
+    { path: '/developer', component: require('./components/developer.vue') }
 ]
 
 const router = new VueRouter({
@@ -98,6 +86,20 @@ window.Fire = new Vue();
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
+Vue.component(
+    'passport-clients',
+    require('./components/passport/Clients.vue')
+);
+
+Vue.component(
+    'passport-authorized-clients',
+    require('./components/passport/AuthorizedClients.vue')
+);
+
+Vue.component(
+    'passport-personal-access-tokens',
+    require('./components/passport/PersonalAccessTokens.vue')
+);
 
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
 

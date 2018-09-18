@@ -13,6 +13,13 @@ class CreateProductsTable extends Migration
      */
     public function up()
     {
+        Schema::create('auto_numbers', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('name', 32);
+            $table->integer('number');
+            $table->timestamps();
+        });
+
         Schema::create('units', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
@@ -61,18 +68,26 @@ class CreateProductsTable extends Migration
             $table->decimal('diskonPer',10,2)->default(0);
             $table->decimal('diskonNom',10,2)->default(0);
             $table->integer('diskonUnit')->default(0);
-            $table->date('batasDiskon');
+            $table->date('batasDiskon')->nullable();
             $table->decimal('nStokBeli',10,2)->default(0);
             $table->decimal('nStokJual',10,2)->default(0);
             $table->integer('minStok')->default(0);
             $table->integer('stok')->default(0);
             $table->integer('stokAwal')->default(0);
-            $table->string('kemasan')->nullable();
+            $table->text('gambar')->nullable();
+            $table->text('deskripsi')->nullable();
             $table->text('komposisi')->nullable();
+            $table->text('indikasi')->nullable();
+            $table->text('dosis')->nullable();
+            $table->text('penyajian')->nullable();
+            $table->text('perhatian')->nullable();
+            $table->text('efeksamping')->nullable();
+            $table->string('kemasan')->nullable();
+            $table->string('produsen')->nullable();
             $table->boolean('resepdokter')->default(false);
             $table->boolean('narkotika')->default(false);
-            $table->string('produsen')->nullable();
-            $table->text('gambar')->nullable();
+            $table->boolean('isDiskon')->default(false);
+            $table->date('expireDate');
             $table->timestamps();
 
             $table->foreign('user_id')
@@ -101,6 +116,7 @@ class CreateProductsTable extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('auto_numbers');
         Schema::dropIfExists('units');
         Schema::dropIfExists('categories');
         Schema::dropIfExists('suppliers');

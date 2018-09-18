@@ -5,9 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <meta name="csrf-token" content="{{ csrf_token() }}">
-  <title>AdminLTE 3 | Starter</title>
+  <meta name="userId" content="{{ Auth::user()->id }}">
+  <title>Aporio | Beta</title>
   
   <link rel="stylesheet" href="css/app.css">
+  <link rel="stylesheet" href="css/bootstrap-datepicker3.min.css">
+
 </head>
 <body class="hold-transition sidebar-mini" >
 <div class="wrapper" id="app">
@@ -107,6 +110,14 @@
             </ul>
           </li>
           <li class="nav-item">
+            <router-link to="/developer" class="nav-link">
+              <i class="nav-icon fas fa-tachometer-alt blue"></i>
+              <p>
+                Developer
+              </p>
+            </router-link>
+          </li>
+          <li class="nav-item">
             <a class="nav-link" href="{{ route('logout') }}"
                 onclick="event.preventDefault();
                               document.getElementById('logout-form').submit();">
@@ -152,5 +163,9 @@
 
 <!-- REQUIRED SCRIPTS -->
 <script src="js/app.js"></script>
+<script src="js/bootstrap-datepicker.min.js"></script>
+<script>
+  
+</script>
 </body>
 </html>
